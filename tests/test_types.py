@@ -16,7 +16,6 @@
 
 
 import six
-import decimal
 from builtins import object
 from datetime import date
 from datetime import datetime
@@ -81,20 +80,6 @@ class TestTypeLibrary(unittest2.TestCase):
         self.assertIsInstance(demo.num, float)
         demo.num = "nan"
         self.assertIsInstance(demo.num, float)
-
-        with self.assertRaises(exc.CoerceError):
-            demo.num = "123.0a"
-
-        demo.num = decimal.Decimal("nan")
-        self.assertIsInstance(demo.num, decimal.Decimal)
-        demo.num = decimal.Decimal("123.0")
-        self.assertIsInstance(demo.num, decimal.Decimal)
-        demo.num = decimal.Decimal(12)
-        self.assertIsInstance(demo.num, decimal.Decimal)
-        with self.assertRaises(exc.CoerceError):
-            demo.num = decimal.Decimal(" ")
-        with self.assertRaises(exc.CoerceError):
-            demo.num = decimal.Decimal("abc")
 
         with self.assertRaises(exc.CoerceError):
             demo.num = "123.0a"
